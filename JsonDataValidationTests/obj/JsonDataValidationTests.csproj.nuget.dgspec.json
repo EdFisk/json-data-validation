@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidationTests\\JsonDataValidationTests.csproj": {}
+    "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidationTests\\JsonDataValidationTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidationTests\\JsonDataValidationTests.csproj": {
+    "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidationTests\\JsonDataValidationTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidationTests\\JsonDataValidationTests.csproj",
+        "projectUniqueName": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidationTests\\JsonDataValidationTests.csproj",
         "projectName": "JsonDataValidationTests",
-        "projectPath": "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidationTests\\JsonDataValidationTests.csproj",
+        "projectPath": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidationTests\\JsonDataValidationTests.csproj",
         "packagesPath": "C:\\Users\\ed.fisk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidationTests\\obj\\",
+        "outputPath": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidationTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -20,18 +20,17 @@
           "C:\\Users\\ed.fisk\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "netcoreapp2.2"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {},
           "https://pkgs.dev.azure.com/arupcomputedevops/_packaging/arupcomputedevops@Release/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj": {
-                "projectPath": "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj"
+              "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj": {
+                "projectPath": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj"
               }
             }
           }
@@ -43,53 +42,43 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "netcoreapp2.2": {
           "dependencies": {
             "MSTest.TestAdapter": {
               "target": "Package",
-              "version": "[2.1.1, )"
+              "version": "[1.4.0, )"
             },
             "MSTest.TestFramework": {
               "target": "Package",
-              "version": "[2.1.1, )"
+              "version": "[1.4.0, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[16.7.1, )"
+              "version": "[16.0.1, )"
             },
-            "coverlet.collector": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[1.3.0, )"
+              "version": "[2.2.0, )",
+              "autoReferenced": true
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     },
-    "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj": {
+    "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj",
+        "projectUniqueName": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj",
         "projectName": "JsonDataValidation",
-        "projectPath": "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj",
+        "projectPath": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj",
         "packagesPath": "C:\\Users\\ed.fisk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidation\\obj\\",
+        "outputPath": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -106,7 +95,6 @@
         },
         "frameworks": {
           "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
             "projectReferences": {}
           }
         },
@@ -118,7 +106,6 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
           "dependencies": {
             "Arup.Compute.DotNetSdk": {
               "target": "Package",
@@ -144,16 +131,10 @@
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     }
