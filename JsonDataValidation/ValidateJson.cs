@@ -10,7 +10,6 @@ namespace JsonDataValidation
 {
     public class ValidateJson
     {
-        public static void Main() { }
 
         [Calculation("Json validator", "Validate a json input against a json schema", "ed.fisk@arup.com", LevelOfReview.Complete)]
         [Output("Valid?", "Is the json valid against the schema provided", "", "")]
