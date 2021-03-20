@@ -1,0 +1,181 @@
+{
+    "schema": {
+        "name": "AGSi",
+        "version": "0.5.0-beta",
+        "link": "https://ags-data-format-wg.gitlab.io/AGSi_Documentation/"
+    },
+    "file": {
+        "title": "AGSi test file for DC2 calcs",
+        "producedBy": "Arup"
+    },
+    "agsProject": {
+        "projectName": "DesignCheck2 unit test"
+    },
+    "agsiModel": [
+        {
+            "modelID": "dbfca300-857c-4a49-b009-fcf7ac927d15",
+            "modelName": "sample 1D strata",
+            "modelType": "Geotechnic"""ergerwgal design model",
+            "category": "Analytical",""
+            "usage": "testing of soil in-situ stress profile calculation",
+            "agsiModelElement": [
+                {
+                    "elementID": "53378147-50ff-4b93-bf66-cb9a2da1aedd",
+                    "elementName": "MG",
+                    "description": "Made ground cohesionless (sandy) deposit",
+                    "elementType": "Geological unit",
+                    "geometryObject": "agsiGeometryLayer",
+                    "geometryID": "afe2df17-1d38-41b1-bed1-e437c2d21969",
+                    "parameterSetID": "822c8304-5b54-41de-a1dd-313868bd9176"
+                },
+                {
+                    "elementID": "9cb95fbe-17b6-4e17-93d8-0c64e7365e8b",
+                    "elementName": "SS-LM",
+                    "description": "Loose to moderate silty-sand alluvial deposit",
+                    "elementType": "Geological unit",
+                    "geometryObject": "agsiGeometryLayer",
+                    "geometryID": "d17391e2-1549-402c-9744-08ec4c2717cc",
+                    "parameterSetID": "27beb5d4-2c0f-48af-aec0-d2cf76600b65"
+                },
+                {
+                    "elementID": "387add94-4c6f-4830-88fc-b40524b5eaab",
+                    "elementName": "SS-MD",
+                    "description": "Moderate to dense silty-sand alluvial deposit",
+                    "elementType": "Geological unit",
+                    "geometryObject": "agsiGeometryLayer",
+                    "geometryID": "b2f82e07-a8a4-4225-8f86-a6db716a32c1",
+                    "parameterSetID": "e0179579-81dc-4ce8-95c1-e396636d0197"
+                }
+            ]
+        }
+    ],
+    "agsiGeometry": {
+        "geometrySetID": "9f947e39-5426-4a64-8474-5290f674e8fe",
+        "agsiGeometryLayer": [
+            {
+                "geometryID": "afe2df17-1d38-41b1-bed1-e437c2d21969",
+                "description": "Design profile for MG",
+                "topElevation": 30,
+                "bottomElevation": 29.4
+            },
+            {
+                "geometryID": "d17391e2-1549-402c-9744-08ec4c2717cc",
+                "description": "Design profile for SS-LM",
+                "topElevation": 29.4,
+                "bottomElevation": 28.7
+            },
+            {
+                "geometryID": "b2f82e07-a8a4-4225-8f86-a6db716a32c1",
+                "description": "Design profile for SS-MD",
+                "topElevation": 28.7,
+                "bottomElevation": 28
+            }
+        ]
+    },
+    "agsiData": {
+        "agsiDataParameterSet": [
+            {
+                "parameterSetID": "822c8304-5b54-41de-a1dd-313868bd9176",
+                "description": "Design parameters for MG",
+                "agsiDataParameterValue": [
+                    {
+                        "codeID": "GroundwaterTableElevation",
+                        "valueNumeric": 29.2
+                    },
+                    {
+                        "codeID": "UnitWeightBulk",
+                        "caseID": "UnitWeightUnsat",
+                        "valueNumeric": 19.00
+                    },
+                    {
+                        "codeID": "UnitWeightBulk",
+                        "caseID": "UnitWeightSat",
+                        "valueNumeric": 19.50
+                    },
+                    {
+                        "codeID": "K0",
+                        "valueNumeric": 0.6
+                    }
+                ]
+            },
+            {
+                "parameterSetID": "27beb5d4-2c0f-48af-aec0-d2cf76600b65",
+                "description": "Design parameters for SS-LM",
+                "agsiDataParameterValue": [
+                    {
+                        "codeID": "GroundwaterTableElevation",
+                        "valueNumeric": 29.2
+                    },
+                    {
+                        "codeID": "UnitWeightBulk",
+                        "caseID": "UnitWeightUnsat",
+                        "valueNumeric": 18.50
+                    },
+                    {
+                        "codeID": "UnitWeightBulk",
+                        "caseID": "UnitWeightSat",
+                        "valueNumeric": 19.00
+                    },
+                    {
+                        "codeID": "K0",
+                        "valueNumeric": 0.6
+                    }
+                ]
+            },
+            {
+                "parameterSetID": "e0179579-81dc-4ce8-95c1-e396636d0197",
+                "description": "Design parameters for SS-MD",
+                "agsiDataParameterValue": [
+                    {
+                        "codeID": "GroundwaterTableElevation",
+                        "valueNumeric": 29.2
+                    },
+                    {
+                        "codeID": "UnitWeightBulk",
+                        "caseID": "UnitWeightUnsat",
+                        "valueNumeric": 20.0
+                    },
+                    {
+                        "codeID": "UnitWeightBulk",
+                        "caseID": "UnitWeightSat",
+                        "valueNumeric": 20.0
+                    },
+                    {
+                        "codeID": "K0",
+                        "valueNumeric": 0.8
+                    }
+                ]
+            }
+        ],
+        "agsiDataCode": [
+            {
+                "codeID": "GroundwaterTableElevation",
+                "description": "Groundwater table elevation",
+                "units": "mOD",
+                "isStandard": false
+            },
+            {
+                "codeID": "UnitWeightBulk",
+                "description": "Bulk unit weight",
+                "units": "kN/m3",
+                "isStandard": true
+            },
+            {
+                "codeID": "K0",
+                "description": "Coefficient of Earth Pressure at Rest for Normally Consolidated Soils",
+                "units": "n/a",
+                "isStandard": false
+            }
+        ],
+        "agsiDataCase": [
+            {
+                "caseID": "UnitWeightUnsat",
+                "description": "Bulk unit weight in unsaturated conditions"
+            },
+            {
+                "caseID": "UnitWeightSat",
+                "description": "Bulk unit weight in saturated conditions"
+            }
+        ]
+    }
+}

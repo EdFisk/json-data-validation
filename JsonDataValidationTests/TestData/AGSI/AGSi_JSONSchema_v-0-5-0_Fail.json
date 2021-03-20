@@ -1,0 +1,1797 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/json-schema-core.html",
+  "$id": "https://ags-data-format-wg.gitlab.io/AGSi_Documentation/",
+  "title": "AGSi",
+  "description": "Data transfer format for ground model and interpretative information",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "$ref": "#/$defs/schema"
+    },
+    "file": {
+      "$ref": "#/$defs/file"
+    },
+    "agsProject": {
+      "$ref": "#/$defs/agsProject"
+    },
+    "agsiModel": {
+      "type": "string",
+      "items": {
+        "$ref": "#/$defs/agsiModel"
+      }
+    },
+    "agsiGeometry": {
+      "$ref": "#/$defs/agsiGeometry"
+    },
+    "agsiData": {
+      "$ref": "#/$defs/agsiData"
+    }
+  },
+  "additionalProperties": false,
+  "required": [],
+  "$defs": {
+    "coordinateTuple": {
+      "description": "Sub-schema for a coordinate tuple, referenced from other objects",
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 3
+    },
+    "valueProfile": {
+      "description": "Sub-schema for a list of coordinate tuples, referenced from other objects",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+    "schema": {
+      "description": "Defines the schema used for this file/data set. It is recommended that, where possible, this object is output at the top of the file, for human readability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the AGS schema used herein",
+          "type": "string",
+          "minLength": 1,
+          "example": "AGSi"
+        },
+        "version": {
+          "description": "Version of the named AGS schema used herein",
+          "type": "string",
+          "minLength": 1,
+          "example": "0.5.0-beta"
+        },
+        "link": {
+          "description": "Web link to the AGS schema used herein",
+          "type": "string",
+          "format": "uri",
+          "example": "https://ags-data-format-wg.gitlab.io/AGSi_Documentation/"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name", "version"]
+    },
+    "file": {
+      "description": "Meta data for this file (or data set, if not transferred as a file as such).  The file/data set should be treated as a document in accordance with standards established for the project. The attributes provided align with good practice BIM, in accordance with ISO19650. It is recommended that, where possible, this object is output at the top of the file, after the schema object, for human readability.",
+      "type": "string",
+      "properties": {
+        "title": {
+          "description": "Title of the file/data set (as used for document management system)",
+          "type": "string",
+          "minLength": 1,
+          "example": "Stage 3 Sitewide Ground models"
+        },
+        "projectTitle": {
+          "description": "Name of project (as used for document management system)",
+          "type": "string",
+          "example": "Gotham City Metro Purple Line, C999 Geotechnical Package X"
+        },
+        "description": {
+          "description": "Additional description of the file/data set, if required.",
+          "type": "string",
+          "example": "Geological model and geotechnical design models produced for Stage 4 design"
+        },
+        "producedBy": {
+          "description": "Organisation that produced this file/data set",
+          "type": "string",
+          "minLength": 1,
+          "example": "ABC Consultants"
+        },
+        "fileUUID": {
+          "description": "Universal unique identifier (UUID) for the file or data set",
+          "type": "string",
+          "example": "98e17952-c99d-4d87-8f01-8ba75d29b6ad"
+        },
+        "fileURI": {
+          "description": "URI for the location of this file/data set within the project document system",
+          "type": "string",
+          "format": "uri",
+          "example": "https://gothammetro.sharepoint.com/C999/docs/C999-ABC-AX-XX-M3-CG-1234"
+        },
+        "reference": {
+          "description": "Document reference (typically in accordance with ISO19650, BS1192 or project standards)",
+          "type": "string",
+          "example": "C999-ABC-AX-XX-M3-CG-1234"
+        },
+        "revision": {
+          "description": "Revision reference (typically in accordance with ISO19650 or BS1192 or project standards)",
+          "type": "string",
+          "example": "P1"
+        },
+        "date": {
+          "description": "Date of production of this data set/file",
+          "type": "string",
+          "format": "date",
+          "example": "2018-10-05"
+        },
+        "status": {
+          "description": "Status, typically following recommendations of BS8574.",
+          "type": "string",
+          "example": "Final"
+        },
+        "statusCode": {
+          "description": "Status code in accordance with ISO19650 (or BS1192 suitability code)",
+          "type": "string",
+          "example": "S2"
+        },
+        "systemURI": {
+          "description": "URI (link address) for the location of this file/data set within the project document management system.",
+          "type": "string",
+          "format": "uri",
+          "example": "https://gothammetro.sharepoint.com/C999/docs/C999-BDL-AX-XX-RP-WG-0002"
+        },
+        "madeBy": {
+          "description": "Person(s) identified as originator",
+          "type": "string",
+          "example": "A Green"
+        },
+        "checkedBy": {
+          "description": "Person(s) identified as checker",
+          "type": "string",
+          "example": "P Brown"
+        },
+        "approvedBy": {
+          "description": "Person(s) identified as approver",
+          "type": "string",
+          "example": "T Black"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["title", "producedBy"]
+    },
+    "agsProject": {
+      "description": "Metadata for the specific project/commission (the Project) under which this data set has been delivered. The parent project, including the ultimate parent project, may be identified using the relevant attributes. ",
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "description": "Name of the specific project/commission for the Project",
+          "type": "string",
+          "minLength": 1,
+          "example": "C999 Geotechnical Package X"
+        },
+        "producer": {
+          "description": "Organisation employed by the client responsible for the Project",
+          "type": "string",
+          "example": "ABC Consultants"
+        },
+        "producerSuppliers": {
+          "description": "If applicable, subconsultant(s) or subcontractor(s) employed  on the Project. Typically only include suppliers with direct involvement in producing the data included in this file. Input required as a text string not an array.",
+          "type": "string",
+          "example": "Acme Environmental, AN Other Organisation"
+        },
+        "client": {
+          "description": "Client for the Project",
+          "type": "string",
+          "example": "XYZ D&B Contractor"
+        },
+        "description": {
+          "description": "Brief project description.",
+          "type": "string",
+          "example": "Stage 3 sitewide ground modelling, including incorporation of new 2018 GI data."
+        },
+        "projectCountry": {
+          "description": "Normally the country in which the ultimate project is taking place.",
+          "type": "string",
+          "example": "United Kingdom"
+        },
+        "producerProjectID": {
+          "description": "Identifier for this Project used by the producer of this file ",
+          "type": "string",
+          "example": "P12345"
+        },
+        "clientProjectID": {
+          "description": "Identifier for this Project used by the client",
+          "type": "string",
+          "example": "C999/ABC"
+        },
+        "parentProjectName": {
+          "description": "If applicable, the parent project/commission under which the Project has been procured, or which the Project reports to",
+          "type": "string",
+          "example": "C999 Area A Phase 1 Design and Build"
+        },
+        "ultimateProjectName": {
+          "description": "If applicable, the top level parent project that the Project is ultimately for. Typically the works that are to be constructed, or a framework.",
+          "type": "string",
+          "example": "Gotham City Metro Purple Line"
+        },
+        "ultimateProjectClient": {
+          "description": "Client for the top level parent project",
+          "type": "string",
+          "example": "City Transport Authority"
+        },
+        "briefDocumentSetID": {
+          "description": "Reference to the brief and/or specification for the project, details of which should be provided by way of an agsProjectDocumentSet object",
+          "type": "string",
+          "example": "SpecProject"
+        },
+        "reportDocumentSetID": {
+          "description": "Reference to report(s) and other documentation produced as part of this project and/or provided in support of this data set. ",
+          "type": "string",
+          "example": "ReportProject"
+        },
+        "agsProjectCoordinateSystem": {
+          "description": "Array of embedded agsProjectCoordinateSystem object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsProjectCoordinateSystem"
+          }
+        },
+        "agsProjectInvestigation": {
+          "description": "Array of embedded agsProjectInvestigation object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsProjectInvestigation"
+          }
+        },
+        "agsProjectDocumentSet": {
+          "description": "Array of embedded agsProjectDocumentSet object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsProjectDocumentSet"
+          }
+        },
+        "agsProjectCodeSet": {
+          "description": "Array of embedded agsProjectCodeSet object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsProjectCodeSet"
+          }
+        },
+        "remarks": {
+          "description": "Additional remarks if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["projectName"]
+    },
+    "agsProjectCoordinateSystem": {
+      "description": "Defines the spatial coordinate system(s) used by the models. The coordinate system(s) used by the model is considered to be the model coordinate system, although this could be an established regional or national system. A secondary global coordinate system, which will normally be an established regional or national system, may also be defined (for each model system) but this will only exist via transformation from the model coordinate system. Refer to Project Rules for further details.",
+      "type": "object",
+      "properties": {
+        "systemID": {
+          "description": "Internal identifier for this coordinate system. Not required if only one system is being used.",
+          "type": "string",
+          "example": "MetroXYZ"
+        },
+        "description": {
+          "description": "Name or short description for this coordinate system.",
+          "type": "string",
+          "example": "3D model coordinate system: Gotham Metro Grid + OS elevations"
+        },
+        "systemType": {
+          "description": "Type of system. Only cartesian systems fully supported at present: XYZ (3D), XZ (2D vertical section), XY (2D map), Z (elevation only, i.e.. simple layer profiles). For other types of system input Other and describe in name or remarks.",
+          "type": "string",
+          "enum": ["XYZ", "XZ", "XY", "Z", "other"],
+          "example": "XYZ"
+        },
+        "systemNameXY": {
+          "description": "Name/description of horizontal coordinate (XY) reference system used for model system",
+          "type": "string",
+          "example": "Gotham Metro Grid"
+        },
+        "systemNameZ": {
+          "description": "Name/description of vertical coordinate (Z) reference system used for model system.",
+          "type": "string",
+          "example": "Ordnance Datum Newlyn"
+        },
+        "axisNameX": {
+          "description": "Axis name for X axis of model coordinate system",
+          "type": "string",
+          "example": "Easting"
+        },
+        "axisNameY": {
+          "description": "Axis name for Y axis of model coordinate system",
+          "type": "string",
+          "example": "Northing"
+        },
+        "axisNameZ": {
+          "description": "Axis name for Z axis of model coordinate system",
+          "type": "string",
+          "example": "Elevation"
+        },
+        "axisUnitsXY": {
+          "description": "Units for X and Y axis (or X axis only if no Y axis). Units are considered to be case sensitive.",
+          "type": "string",
+          "minLength": 1,
+          "example": "m"
+        },
+        "axisUnitsZ": {
+          "description": "Units for Z axis (elevation). May include optional prefix and/or suffix as commonly used to identify the datum used. Considered to be case sensitive.",
+          "type": "string",
+          "minLength": 1,
+          "example": "mOD"
+        },
+        "globalXYSystem": {
+          "description": "Recognised national or regional horizontal coordinate system that the model coordinate system can be mapped to. This is intended to facilitate co-ordination with data sets in alternative systems and, in particular, encourage legacy use from archive. Transformation information provided in relevant attributes.",
+          "type": "string",
+          "example": "British National Grid"
+        },
+        "globalZSystem": {
+          "description": "Recognised national or regional vertical coordinate system that the model coordinate system can be mapped to. This is intended to facilitate co-ordination with data sets in alternative systems and, in particular, encourage legacy use from archive. Transformation information provided in relevant attributes.",
+          "type": "string",
+          "example": "Ordnance Datum Newlyn"
+        },
+        "transformShiftX": {
+          "description": "Shift in X (or Easting) direction of origin of model coordinate system relative to global coordinate system, i.e. X value of the model origin in the global system.",
+          "type": "number",
+          "example": 450000
+        },
+        "transformShiftY": {
+          "description": "Shift in Y (or Northing) direction of origin of model coordinate system relative to global coordinate system, i.e. Y value of the model origin in the global system.",
+          "type": "number",
+          "example": 125000
+        },
+        "transformXYRotation": {
+          "description": "Rotation in anticlockwise direction of model coordinate system XY axes relative to global coordinate system XY axes. Units of rotation are decimal degrees. ",
+          "type": "number",
+          "example": 1.44450116
+        },
+        "transformXYScaleFactor": {
+          "description": "Scale factor as ratio of distance in global coordinate system to model coordinate system, i.e. global distance divided by model distance",
+          "type": "number",
+          "example": 0.9999745653
+        },
+        "transformshiftZ": {
+          "description": "Shift in Z (or Elevation) direction of origin of model coordinate system relative to global coordinate system, i.e. Z value of the model origin in the global system.",
+          "type": "number",
+          "example": -100
+        },
+        "remarks": {
+          "description": "Additional remarks if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["axisUnitsXY", "axisUnitsZ"]
+    },
+    "agsProjectInvestigation": {
+      "description": "Basic metadata for investigations, generally ground investigations, relevant to the file/data set. Referenced from various parts of the schema. More detailed metadata may be provided using an agsiDataPropertySet object referenced from here.",
+      "type": "object",
+      "properties": {
+        "investigationID": {
+          "description": "Internal identifier for this investigation. Referenced by other parts of the schema such as agsiGeometryExpHole.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GIPackageA"
+        },
+        "investigationName": {
+          "description": "Name of investigation",
+          "type": "string",
+          "minLength": 1,
+          "example": "Gotham City Metro Purple Line, C999 Package A"
+        },
+        "description": {
+          "description": "Further description of investigation, if required",
+          "type": "string",
+          "example": "Preliminary sitewide investigation, March-July 2018"
+        },
+        "contractor": {
+          "description": "Contractor undertaking the investigation",
+          "type": "string",
+          "example": "Boring Drilling Ltd"
+        },
+        "client": {
+          "description": "Commissioning (contracting) client for the investigation",
+          "type": "string",
+          "example": "XYZ D&B Contractor"
+        },
+        "engineer": {
+          "description": "Organisation acting as Engineer, Investigation Supervisor, Contract Administrator or equivalent. If technical and contractual roles are split, then include both.",
+          "type": "string",
+          "example": "ABC Consultants"
+        },
+        "parentProjectName": {
+          "description": "Name of the parent project that this investigation is for. If parent is ultimate parent project, then may be left blank.",
+          "type": "string",
+          "example": "C999 Area A Phase 1 Design and Build"
+        },
+        "ultimateProjectName": {
+          "description": "Name of the ultimate parent project that this investigation is for",
+          "type": "string",
+          "example": "Gotham City Metro Purple Line"
+        },
+        "ultimateProjectClient": {
+          "description": "Client for the ultimate parent project",
+          "type": "string",
+          "example": "City Transport Authority"
+        },
+        "subcontractors": {
+          "description": "List of significant subcontractors or suppliers working on the investigation. List as a text string, not an array.",
+          "type": "string",
+          "example": "Acme Specialist Lab, XYZ Environmental Lab"
+        },
+        "fieldworkDateStart": {
+          "description": "Date of start of fieldwork. Date in ISO 8601 format so it could be to nearest month (2019-05) or just the year if exact date not available.",
+          "type": "string",
+          "format": "date",
+          "example": "2018-08-21"
+        },
+        "scopeDescription": {
+          "description": "Brief description of scope",
+          "type": "string",
+          "example": "Preliminary investigation comprising 27 boreholes of which 15 extended by rotary coring up to 55m depth, 45 CPT (max 15m), 35 trial pits, 26 dynamic sampling holes, geotechnical and contamination sampling and testing, piezometric monitoring, limited gas monitoring."
+        },
+        "locationCoordinateProject": {
+          "description": "Coordinates, in a relevant model coordinate system (if applicable), of a point that represents the general location of the investigation, typically the middle of the site. Relevant system will be usually be a 3D system that is used for all 3D models, or a 2D map system. Do not use this attribute if multiple different 3D model systems are in use.",
+          "type": "array",
+          "$ref": "#/$defs/coordinateTuple",
+          "example": [25500.0, 13200.0]
+        },
+        "locationCoordinateGlobal": {
+          "description": "Coordinates, in global coordinate system (national or regional system, as defined in agsProjectCoordinateSystem) of a point that represents the general location of the investigation, typically the middle of the site.",
+          "type": "array",
+          "$ref": "#/$defs/coordinateTuple",
+          "example": [475270.0, 137965.0]
+        },
+        "locationDescription": {
+          "description": "Brief description that locates the site. Could be a postal address.",
+          "type": "string",
+          "example": "Gotham City, west, central and southeast"
+        },
+        "specificationDocumentSetID": {
+          "description": "Reference to the specification for the GI, details of which should be provided in an agsProjectDocumentSet object",
+          "type": "string",
+          "example": "GIPackageASpec"
+        },
+        "reportDocumentSetID": {
+          "description": "Reference to the report(s), details of which should be provided in an agsProjectDocumentSet object",
+          "type": "string",
+          "example": "GIPackageAReport"
+        },
+        "dataDocumentSetID": {
+          "description": "Reference to the data for the GI, typically the AGS (factual) data, details of which should be provided in an agsProjectDocumentSet object.",
+          "type": "string",
+          "example": "GIPackageAData"
+        },
+        "propertySetID": {
+          "description": "Reference to an agsiDataPropertySet object. Used to provide further metadata relating to the investigation, if required.",
+          "type": "string",
+          "example": "PropGIGeneralA"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some additional remarks"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["investigationID", "investigationName"]
+    },
+    "agsProjectDocumentSet": {
+      "description": "Container and metadata for a set of supporting documents or reference information, which may be referenced from other parts of the schema. This container must be used and referenced, even if there is only one document within it.",
+      "type": "object",
+      "properties": {
+        "documentSetID": {
+          "description": "ID used internally in this file/data set.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GIPackageAReport"
+        },
+        "description": {
+          "description": "Brief description, i.e. what this set of documents is commonly known as.",
+          "type": "string",
+          "example": "Package A factual report"
+        },
+        "agsProjectDocument": {
+          "description": "Array of embedded agsProjectDocument object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsProjectDocument"
+          }
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some additional remarks"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["documentSetID"]
+    },
+    "agsProjectDocument": {
+      "description": "Metadata for the individual documents or references contained within a document set.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Original title on the document",
+          "type": "string",
+          "example": "Factual ground investigation report, Gotham City Metro Purple Line, C999 Package A, Volume 1 of 3"
+        },
+        "description": {
+          "description": "Further description if required. Typically what the document is commonly known as, given that the formal title may be verbose. Alternatively use for name/title given in project documentation system if this differs from original title.",
+          "type": "string",
+          "example": "Package A factual report, Volume 1"
+        },
+        "author": {
+          "description": "The original author of the document",
+          "type": "string",
+          "example": "Boring Drilling Ltd"
+        },
+        "client": {
+          "description": "The original commissioning client for the document",
+          "type": "string",
+          "example": "XYZ D&B Contractor"
+        },
+        "originalReference": {
+          "description": "Original reference shown on the document, if different from reference used by project document system (see systemReference).",
+          "type": "string",
+          "example": "12345/GI/2"
+        },
+        "systemReference": {
+          "description": "Document reference used in the project document management system. May differ from original reference shown on document.",
+          "type": "string",
+          "example": "C999-BDL-AX-XX-RP-WG-0002"
+        },
+        "revision": {
+          "description": "Revision reference (typically in accordance with ISO19650 or BS1192)",
+          "type": "string",
+          "example": "P2"
+        },
+        "date": {
+          "description": "Date of the document (current revision)",
+          "type": "string",
+          "format": "date",
+          "example": "2018-09-06"
+        },
+        "status": {
+          "description": "Status as indicated on or within the document, typically following recommendations of BS8574 if applicable.",
+          "type": "string",
+          "example": "Final"
+        },
+        "statusCode": {
+          "description": "Status code, typically in accordance with ISO19650, or BS1192 suitability code",
+          "type": "string",
+          "example": "S2"
+        },
+        "documentURI": {
+          "description": "URI (link address) for the document. This will be a relative link if document included with the AGSi data set. For a public domain published reference, the link should be provided here.",
+          "type": "string",
+          "format": "uri",
+          "example": "docs/GI/C999-BDL-AX-XX-RP-WG-0002.pdf"
+        },
+        "documentSystemURI": {
+          "description": "URI (link address) for the location of the document within the project document management system. To be used if documentURI attribute used for relative link.",
+          "type": "string",
+          "format": "uri",
+          "example": "https://gothammetro.sharepoint.com/C999/docs/C999-BDL-AX-XX-RP-WG-0002"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some additional remarks"
+        }
+      },
+      "additionalProperties": false
+    },
+    "agsProjectCodeSet": {
+      "description": "Sets of codes used by some parts of the schema, as listed in associations below. Not to be used for property and parameter codes in the Data group (use agsiDataCode object instead).  Sets organised according to what they are used for. Typically used for project specific ABBR codes inherited from AGS factual data. Inclusion of standard AGS ABBR codes used is optional (unless required by specification). The individual codes are contained within the embedded agsProjectCode objects or found at the source specified.",
+      "type": "object",
+      "properties": {
+        "codeSetID": {
+          "description": "Internal identifier for this code set. Not currently referenced from other parts of the schema, but included for completeness as it may prove useful in some applications.",
+          "type": "string",
+          "example": "CodeSetGeology"
+        },
+        "description": {
+          "description": "Name or short description of the code set.",
+          "type": "string",
+          "example": "Geology codes"
+        },
+        "usedByObject": {
+          "description": "Name of the AGSi object that references this code set.",
+          "type": "string",
+          "minLength": 1,
+          "example": "agsiGeometryColumnSet"
+        },
+        "usedByAttribute": {
+          "description": "Name of the attribute of the AGSi object that references this code set.",
+          "type": "string",
+          "minLength": 1,
+          "example": "geologyCode"
+        },
+        "sourceDescription": {
+          "description": "Description of the source of the list of codes to be used for this set, if applicable. This could be a published source, a project reference or a file provided with this data set. Optional if the codes are provided as agsProjectCode objects.",
+          "type": "string",
+          "example": "BGS lexicon of geology codes"
+        },
+        "sourceURI": {
+          "description": "Link to source of list of codes to be used for this set, if applicable. This could be a published source, link to a project reference, or a file provided with this data set. Optional if the codes are provided as agsProjectCode objects.",
+          "type": "string",
+          "format": "uri",
+          "example": "https://webapps.bgs.ac.uk/lexicon/"
+        },
+        "concatenationAllow": {
+          "description": "true if concatenation of any combination of codes in the list is permitted, e.g. composite exploratory hole types when using AGS ABBR codes. Assume false (not permitted) if attribute omitted.",
+          "type": "boolean",
+          "example": false
+        },
+        "concatenationCharacter": {
+          "description": "Linking character(s) used for concatenation, if permitted. Input blank string if none. ",
+          "type": "string",
+          "example": "+"
+        },
+        "agsProjectCode": {
+          "description": "Array of embedded agsProjectCode object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsProjectCode"
+          }
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Same as AGS ABBR code used in GI Package A"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["usedByObject", "usedByAttribute"]
+    },
+    "agsProjectCode": {
+      "description": "Project specific codes used by some parts of the schema. Typically used for project specific ABBR codes inherited from AGS factual data. Inclusion of standard AGS ABBR codes used is optional (unless required by specification). Not to be used for property and parameter codes in the Data group (use agsiDataCode object instead).  ",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Project specific code used in this file/data set. All codes in a set should be unique. ",
+          "type": "string",
+          "minLength": 1,
+          "example": "MG"
+        },
+        "description": {
+          "description": "Short description of what the code represents.",
+          "type": "string",
+          "minLength": 1,
+          "example": "Made Ground"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some additional remarks"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["code", "description"]
+    },
+    "agsiModel": {
+      "description": "An agsiModel object is the parent object for a single model. It contains general metadata for a model as well as the embedded element, boundary and subset objects that make up the model. There may be several models/agsiModel objects in an AGSi file/data set.  However, a single agsiModel object may itself incorporate different ways of representing the model information and supporting data, e.g. 3D volumes, cross sections and exploratory hole logs may all be incorporated into the same agsiModel. These different representations may be (optionally) identified as subsets of the model using agsiModelSubset objects. ",
+      "type": "object",
+      "properties": {
+        "modelID": {
+          "description": "Identifier, possibly a UUID. This is optional and is not referenced anywhere else in the schema, but it is beneficial to include this to help with data control and integrity, and some software/applications may require it.",
+          "type": "string",
+          "example": "1fb599ab-c040-408d-aba0-85b18bb506c2"
+        },
+        "modelName": {
+          "description": "Short name of model",
+          "type": "string",
+          "example": "Sitewide geological model"
+        },
+        "description": {
+          "description": "More verbose description of model, if required.",
+          "type": "string",
+          "example": "C999 Package X Sitewide geological model exported from SomeGeoModelSoftware. Incorporates 2018 GI data "
+        },
+        "coordSystemID": {
+          "description": "Reference to coordinate system applicable to this model (agsProjectCoordinateSystem object).",
+          "type": "string",
+          "example": "MetroXYZ"
+        },
+        "modelType": {
+          "description": "Type of model. Incorporates domain and category.",
+          "type": "string",
+          "example": "Geological model"
+        },
+        "category": {
+          "description": "Category of model.",
+          "type": "string",
+          "example": "Observational"
+        },
+        "domain": {
+          "description": "Domain of model.",
+          "type": "string",
+          "example": "Engineering geology"
+        },
+        "input": {
+          "description": "Short description of input data used by model an/or cross reference to document describing this.",
+          "type": "string",
+          "example": "Input data described in GIR section 3.3.2"
+        },
+        "method": {
+          "description": "Short description of method used to create model, including software used, and/or reference to the document where this is discussed.",
+          "type": "string",
+          "example": "3D model created in SomeGeoModelSoftware. See GIR section 3.3.3 for details."
+        },
+        "usage": {
+          "description": "Short description of intended and/or permitted usage including limitations or restrictions. Strongly recommended.",
+          "type": "string",
+          "example": "Observational and interpolated geological profile. For reference and visualisation only. Not suitable for direct use in design. See GIR section 3.3.4 for details."
+        },
+        "uncertainty": {
+          "description": "Short statement discussing uncertainty with respect to the information presented in this model.",
+          "type": "string",
+          "example": "The boundaries of the geological units presented in this model are a best estimate based on interpolation between exploratory holes, which in some cases are >100m apart. In addition, in some places the boundaries are based on interpretation of CPT results. Therefore the unit boundaries shown are subject to uncertainty, which increases with distance from the exploratory holes. Refer to GIR section 3.3.4 for more information. "
+        },
+        "documentSetID": {
+          "description": "Reference to documentation relating to model (reference to agsProjectDocumentSet object)",
+          "type": "string",
+          "example": "PackageXGIRGDR"
+        },
+        "agsiModelElement": {
+          "description": "Array of embedded agsiModelElement object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiModelElement"
+          }
+        },
+        "agsiModelBoundary": {
+          "description": "Single embedded agsiModelBoundary object",
+          "type": "object",
+          "$ref": "#/$defs/agsiModelBoundary"
+        },
+        "agsiModelSubset": {
+          "description": "Array of embedded agsiModelSubset object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiModelSubset"
+          }
+        },
+        "remarks": {
+          "description": "Additional remarks, if required.",
+          "type": "string",
+          "example": "Some additional remarks"
+        }
+      },
+      "additionalProperties": false
+    },
+    "agsiModelElement": {
+      "description": "A model is made up of elements. These elements are defined by agsiModelElement objects. Each element will have geometry assigned to it, by reference to an object in the agsiGeometry Group. Which class of object is referenced will depend on the form of geometry required. Elements may also have data (properties and parameters) associated with them.",
+      "type": "object",
+      "properties": {
+        "elementID": {
+          "description": "Identifier, possibly a UUID. This is optional and is not referenced anywhere else in the schema, but it is beneficial to include this as some applications may require an identifier.",
+          "type": "string",
+          "example": "GCC/W"
+        },
+        "elementName": {
+          "description": "Name or short description of what this element represents.",
+          "type": "string",
+          "example": "Gotham City Clay, west zone"
+        },
+        "description": {
+          "description": "More verbose description, as required. Usage may be determined by type of element, e.g. for a geological unit this could be used to describe typical lithology.",
+          "type": "string",
+          "example": "Stiff to very stiff slightly sandy blue/grey CLAY, with occasional claystone layers (typically <0.1m). Becoming very sandy towards base of unit."
+        },
+        "elementType": {
+          "description": "Type of element, i.e. what the element represents in general terms.",
+          "type": "string",
+          "example": "Geological unit"
+        },
+        "subsetID": {
+          "description": "Identifies the subset that this element belongs to, if applicable, by reference to an agsiModelSubset object. ",
+          "type": "string",
+          "example": "GeologyUnitVolumes"
+        },
+        "geometryObject": {
+          "description": "Object type (from Geometry group) referenced by geometryID attribute.",
+          "type": "string",
+          "example": "agsiGeometryVolFromSurfaces"
+        },
+        "geometryID": {
+          "description": "Identifies the geometry for this element. The object type referenced will depend on the type of geometry, which should be compatible with that defined in geometryType.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GeologyGCC"
+        },
+        "areaLimitGeometryID": {
+          "description": "If required, a limiting plan area for the element may be defined by reference to a closed polygon object. The polygon acts as a 'cookie cutter' so the element boundary will be curtailed to stay within the polygon. Geometry beyond the boundary is ignored. This allows a large element to be easily divided up into parts, e.g. to allow different properties or parameters to be reported for each part. Use with caution as it may not be supported by all software/applications. Confirm usage in specification.",
+          "type": "string",
+          "example": "GeometryAreaWest"
+        },
+        "propertySetID": {
+          "description": "Link to property data specific to this model element, by reference to an agsiDataPropertySet object.",
+          "type": "string",
+          "example": "PropLC/W"
+        },
+        "parameterSetID": {
+          "description": "Link to parameter data  specific to this model element, by reference to an agsiDataParameterSet object.",
+          "type": "string",
+          "example": "ParamLC/W"
+        },
+        "colourRGB": {
+          "description": "Preferred display colour (RGB hexadecimal)",
+          "type": "string",
+          "example": "#c0c0c0"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required.",
+          "type": "string",
+          "example": "Some additional remarks"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["geometryID"]
+    },
+    "agsiModelBoundary": {
+      "description": "An agsiModelBoundary object defines the model boundary, i.e. the maximum extent of the model. Any elements or parts of elements lying outside the boundary are deemed to not be part of the model. Only one boundary per agsiModel is permitted. Only plan boundaries with vertical sides are permitted, defined by either limiting coordinates, or a bounding close polygon. The top and base may be either a flat plane at a defined elevation, or a surface. Top boundary may not be required, depending on nature of model and/or software/application used (to be confirmed in specification). ",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Short description.",
+          "type": "string",
+          "example": "Boundary for Geological Model: sitewide"
+        },
+        "minX": {
+          "description": "Minimum X for box boundary",
+          "type": "number",
+          "example": 20000
+        },
+        "maxX": {
+          "description": "Maximum X for box boundary",
+          "type": "number",
+          "example": 35000
+        },
+        "minY": {
+          "description": "Minimum Y for box boundary",
+          "type": "number",
+          "example": 10000
+        },
+        "maxY": {
+          "description": "Maximum Y for box boundary",
+          "type": "number",
+          "example": 15000
+        },
+        "topElevation": {
+          "description": "Elevation (Z) of top plane of model for box boundary",
+          "type": "number",
+          "example": 40
+        },
+        "bottomElevation": {
+          "description": "Elevation (Z) of bottom plane of model for box boundary",
+          "type": "number",
+          "example": -40
+        },
+        "boundaryXYGeometryID": {
+          "description": "Reference to geometry of (closed) polygon defining plan extent of model, as an alternative to the box boundary. Use with caution as this may not be supported by all software/applications. Confirm use in specification.",
+          "type": "string",
+          "example": "GeometryModelBoundary"
+        },
+        "topSurfaceGeometryID": {
+          "description": "Reference to geometry of surface defining top of model, as an alternative to the box boundary. Use with caution as this may not be supported by all software/applications. May not be required for some software/applications. Confirm use in specification.",
+          "type": "string",
+          "example": "GeometryTerrain"
+        },
+        "bottomSurfaceGeometryID": {
+          "description": "Reference to geometry of surface defining base of model, as an alternative to the box boundary. Use with caution as this may not be supported by all software/applications. Confirm use in specification.",
+          "type": "string",
+          "example": "GeometryModelBase"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required.",
+          "type": "string",
+          "example": "Some additional remarks"
+        }
+      },
+      "additionalProperties": false
+    },
+    "agsiModelSubset": {
+      "description": "Used to identify optional subsets of the model. Subsets are created by reference to these objects from agsiModelElement. To be used with caution as subsets may not be supported by all software/applications. Use of subsets should be clarified in the specification. ",
+      "type": "object",
+      "properties": {
+        "subsetID": {
+          "description": "Identifier referenced by agsiModelElement.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GeologyUnitVolumes"
+        },
+        "description": {
+          "description": "Short description.",
+          "type": "string",
+          "example": "Geological unit volumes"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required.",
+          "type": "string",
+          "example": "Some additional remarks"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["subsetID"]
+    },
+    "agsiGeometry": {
+      "description": "The agsiGeometry object is a container for all of the geometry data for a root dataset. It is required in all cases where geometry data is provided. There should be only one agsiGeometry object per root object. All other objects in the Geometry part of the schema are embedded within agsiGeometry.",
+      "type": "object",
+      "properties": {
+        "geometrySetID": {
+          "description": "Identifier, possibly a UUID. This is optional and is not referenced anywhere else in the schema, but it is beneficial to include this to help with data control and integrity.",
+          "type": "string",
+          "example": "f402948e-d5f4-4b1c-923b-2ce8578bb5c3"
+        },
+        "description": {
+          "description": "Similar usage to geometrySetID but intended to be a more verbose description.",
+          "type": "string",
+          "example": "Geometry data for Geological Model and design models"
+        },
+        "agsiGeometryFromFile": {
+          "description": "Array of embedded agsiGeometryFromFile object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryFromFile"
+          }
+        },
+        "agsiGeometryLayer": {
+          "description": "Array of embedded agsiGeometryLayer object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryLayer"
+          }
+        },
+        "agsiGeometryPlane": {
+          "description": "Array of embedded agsiGeometryPlane object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryPlane"
+          }
+        },
+        "agsiGeometryLine": {
+          "description": "Array of embedded agsiGeometryLine object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryLine"
+          }
+        },
+        "agsiGeometryVolFromSurfaces": {
+          "description": "Array of embedded agsiGeometryVolFromSurfaces object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryVolFromSurfaces"
+          }
+        },
+        "agsiGeometryAreaFromLines": {
+          "description": "Array of embedded agsiGeometryAreaFromLines object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryAreaFromLines"
+          }
+        },
+        "agsiGeometryExpHoleSet": {
+          "description": "Array of embedded agsiGeometryExpHoleSet object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryExpHoleSet"
+          }
+        },
+        "agsiGeometryColumnSet": {
+          "description": "Array of embedded agsiGeometryColumnSet object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryColumnSet"
+          }
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false
+    },
+    "agsiGeometryFromFile": {
+      "description": "An agsiGeometryFromFile object is a pointer to geometry data contained within an external file, such as a CAD or model file. This object also includes metadata describing the file being referenced. Refer to Geometry rules and conventions for further requirements and recommendations relating to this object.",
+      "type": "object",
+      "properties": {
+        "geometryID": {
+          "description": "Identifier that will be referenced by Model and Geometry objects as required. All identifiers used within the agsiGeometry group shall be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GeologyGCC"
+        },
+        "description": {
+          "description": "Short description of geometry defined here",
+          "type": "string",
+          "example": "Top of GCC"
+        },
+        "geometryType": {
+          "description": "Nature of geometry represented",
+          "type": "string",
+          "example": "Surface"
+        },
+        "fileFormat": {
+          "description": "Format/encoding of the data, i.e. file format. Refer to vocabulary for list of common formats that may be used, or provide concise identification if other format used.  Refer to Geometry rules and conventions for  requirements and recommendations relating to file formats.",
+          "type": "string",
+          "example": "LandXML"
+        },
+        "fileFormatVersion": {
+          "description": "Additional version information for file format used, if required.",
+          "type": "string",
+          "example": "2.0"
+        },
+        "fileURI": {
+          "description": "URI for the data file. This will be a relative link if file is included as part of the AGSi file/data set. Alternatively, a link to a location within a  project document system. Refer to Geometry rules and conventions for  requirements and recommendations relating to linked files.",
+          "type": "string",
+          "format": "uri",
+          "example": "geometry/geology/GCCtop.xml"
+        },
+        "fileLayer": {
+          "description": "For CAD or model files, if applicable the layer/level on which the required data is located. Use with caution as the ability to interrogate only a specified layer/level may not be supported in all software.",
+          "type": "string",
+          "example": "GCCTop"
+        },
+        "revision": {
+          "description": "Revision of the referenced file.",
+          "type": "string",
+          "example": "P2"
+        },
+        "date": {
+          "description": "Date of issue of this revision",
+          "type": "string",
+          "format": "date",
+          "example": "2018-10-07"
+        },
+        "revisionInfo": {
+          "description": "Revision notes for this revision of the referenced file.",
+          "type": "string",
+          "example": "Updated for GIR rev P2. Additional BH from 2018 GI included."
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["geometryID", "fileURI"]
+    },
+    "agsiGeometryLayer": {
+      "description": "An agsiGeometryLayer object is a volumetric element bounded by two infinite horizontal planes at specified elevations. May be used for defining each element in a stratigraphical column (one dimensional) model. See Geometry rules and conventions for interpretation.",
+      "type": "object",
+      "properties": {
+        "geometryID": {
+          "description": "Identifier that will be referenced by agsiModelElement. All identifiers used within the agsiGeometry group shall be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "DesignPileGCC"
+        },
+        "description": {
+          "description": "Short description of geometry defined here",
+          "type": "string",
+          "example": "Design profile, pile design: Gotham City Clay"
+        },
+        "topElevation": {
+          "description": "Elevation (z) of the top surface. Definition of both top and bottom surfaces is recommended to minimise the risk of error.",
+          "type": "number",
+          "example": 6
+        },
+        "bottomElevation": {
+          "description": "Elevation (z) of the bottom surface. Definition of both top and bottom surfaces is recommended to minimise the risk of error.",
+          "type": "number",
+          "example": -30
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": ["geometryID", "topElevation"]
+        },
+        {
+          "required": ["geometryID", "bottomElevation"]
+        }
+      ]
+    },
+    "agsiGeometryPlane": {
+      "description": "An agsiGeometryPlane object is an infinite horizontal plane at a specified elevation.",
+      "type": "object",
+      "properties": {
+        "geometryID": {
+          "description": "Identifier that will be referenced by Model and Geometry objects as required. All identifiers used within the agsiGeometry group shall be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "DesignBase"
+        },
+        "description": {
+          "description": "Short description of geometry defined here",
+          "type": "string",
+          "example": "Base of design model"
+        },
+        "elevation": {
+          "description": "Elevation (z) of the plane",
+          "type": "number",
+          "example": -30
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["geometryID", "elevation"]
+    },
+    "agsiGeometryLine": {
+      "description": "An agsiGeometryLine object provides data for a polyline or polygon in 2 or 3 dimensional space. For a 2D line, the plane that the line lies in will be determined by the context of referencing object. Lines comprise straight segments. Curves are not supported.",
+      "type": "object",
+      "properties": {
+        "geometryID": {
+          "description": "Identifier that will be referenced by Model and Geometry objects as required. All identifiers used within the agsiGeometry group shall be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GeometryAreaWest"
+        },
+        "description": {
+          "description": "Short description of geometry defined here",
+          "type": "string",
+          "example": "Area polygon for west zone"
+        },
+        "coordinates": {
+          "description": "Co-ordinates of a 2D or 3D line, as an ordered list of co-ordinate tuples. What the co-ordinates represent is determined by the referencing object. To represent a polygon, the first and last coordinate tuples must be identical.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/valueProfile"
+          },
+          "example": [
+            [1100.0, 2250.0],
+            [1200.0, 2350.0],
+            [1350.0, 2200.0],
+            [1250.0, 2100.0],
+            [1100.0, 2250.0]
+          ]
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["geometryID", "coordinates"]
+    },
+    "agsiGeometryVolFromSurfaces": {
+      "description": "An agsiGeometryVolFromSurfaces object defines an element as the volumetric element (solid) between top and/or bottom surfaces. This is a linking object between model element and the source geometry for the surfaces, which will normally be agsiGeometryFromFile objects. Refer to Geometry rules and conventions for full details of how the volume should be interpreted.",
+      "type": "object",
+      "properties": {
+        "geometryID": {
+          "description": "Identifier that will be referenced by Model and Geometry objects as required. All identifiers used within the agsiGeometry group shall be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GeologyGCC"
+        },
+        "description": {
+          "description": "Short description of geometry defined here",
+          "type": "string",
+          "example": "Gotham City Clay"
+        },
+        "topGeometryID": {
+          "description": "Identifies the geometry for top surface, linking to an agsiGeometryFromFile or agsiGeometryPlane object. Definition of both top and bottom surfaces is recommended to minimise the risk of error. Refer to Geometry rules and conventions for further details.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GeologyGCCTop"
+        },
+        "bottomGeometryID": {
+          "description": "Identifies the geometry for bottom surface, linking to an agsiGeometryFromFile or agsiGeometryPlane object. Definition of both top and bottom surfaces is recommended to minimise the risk of error. Refer to Geometry rules and conventions for further details.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GeologyGCCBase"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": ["geometryID", "topGeometryID"]
+        },
+        {
+          "required": ["geometryID", "bottomGeometryID"]
+        }
+      ]
+    },
+    "agsiGeometryAreaFromLines": {
+      "description": "An agsiGeometryAreaFromLines object defines an element as the area between top and/or bottom lines. This will typically be used on cross sections or fence diagrams. This is a linking object between model element and the source geometry for the lines. Refer to Geometry rules and conventions for full details of how the area should be interpreted.",
+      "type": "object",
+      "properties": {
+        "geometryID": {
+          "description": "Identifier that will be referenced by Model and Geometry objects as required. All identifiers used within the agsiGeometry group shall be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "SectionAAGCC"
+        },
+        "description": {
+          "description": "Short description of geometry defined here",
+          "type": "string",
+          "example": "Section AA, Gotham City Clay"
+        },
+        "topGeometryID": {
+          "description": "Identifies the geometry for top line, linking to agsiGeometryLine or agsiGeometryFromFile object. Definition of both top and bottom surfaces is strongly recommended to minimise the risk of error. Refer to Geometry rules and conventions for further details.",
+          "type": "string",
+          "minLength": 1,
+          "example": "SectionAAGCCTop"
+        },
+        "bottomGeometryID": {
+          "description": "Identifies the geometry for bottom line, normally linking to an agsiGeometryFromFile object. Definition of both top and bottom surfaces is strongly recommended to minimise the risk of error. Refer to Geometry rules and conventions for further details.",
+          "type": "string",
+          "minLength": 1,
+          "example": "SectionAAGCCBase"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": ["geometryID", "topGeometryID"]
+        },
+        {
+          "required": ["geometryID", "bottomGeometryID"]
+        }
+      ]
+    },
+    "agsiGeometryExpHoleSet": {
+      "description": "An agsiGeometryExpHoleSet object is a user defined set of exploratory holes (boreholes, trial pits, CPT etc.). A set may contain all holes, or if preferred the holes can be organised into several sets, e.g. sets for different investigations, and/or different types of hole. The data for the holes is incorporated via the embedded agsiGeometryExpHole objects. Geological data is not included in these objects: see agsiGeometryColumnSet and agsiGeometryColumn.",
+      "type": "object",
+      "properties": {
+        "geometryID": {
+          "description": "Identifier that will be referenced by agsiModelElement. All identifiers used within the agsiGeometry group shall be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GIHolesA"
+        },
+        "description": {
+          "description": "Short description of the set of holes defined here",
+          "type": "string",
+          "example": "2018 GI Package A"
+        },
+        "agsiGeometryExpHole": {
+          "description": "Array of embedded agsiGeometryExpHole object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryExpHole"
+          }
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["geometryID"]
+    },
+    "agsiGeometryExpHole": {
+      "description": "An agsiGeometryExpHole object provides the geometric data for a single exploratory hole (borehole, trial pit, CPT etc.). In addition, some limited additional metadata for the hole is included. Reference to an agsiDataPropertySet object can be used to link additional data if required. Geological logging data is not included here: see agsiGeometryColumn.",
+      "type": "object",
+      "properties": {
+        "holeID": {
+          "description": "Identifier that may be referenced by agsiGeometryExpHole. Not necessarily the same as the original hole ID (see holeName) as exploratory hole identifiers should be unique within a dataset. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "A/BH01"
+        },
+        "holeName": {
+          "description": "Current name or ID of the exploratory hole for general use.",
+          "type": "string",
+          "example": "BH01"
+        },
+        "topCoordinate": {
+          "description": "Co-ordinates of the top of the exploratory hole, as a co-ordinate tuple.",
+          "type": "array",
+          "$ref": "#/$defs/coordinateTuple",
+          "example": [1275.5, 2195.0, 15.25]
+        },
+        "verticalHoleDepth": {
+          "description": "Final depth of exploratory hole for vertical holes only. For non-vertical or non-straight holes use profileCoordinates attribute instead",
+          "type": "number",
+          "example": 25
+        },
+        "profileCoordinates": {
+          "description": "Co-ordinates of the line of the exploratory hole, i.e. top, bottom and intermediate changes in direction if required. Input as ordered list of co-ordinate tuples starting at the top. Used for holes that are not vertical, or not straight. May be used for straight vertical holes as alternative to topCoordinate and verticalHoleDepth. Takes precedence over verticalHoleDepth if they are in conflict.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/valueProfile"
+          },
+          "example": [
+            [1275.5, 2195.0, 15.25],
+            [1275.5, 2195.0, -9.75]
+          ]
+        },
+        "holeType": {
+          "description": "Type of exploratory hole. Recommend using code from AGS format ABBR code list, e.g. CP+RC, with project specific codes defined using agsProjectCode. Alternatively, short description may be provided, e.g. cable percussion borehole with rotary follow on.",
+          "type": "string",
+          "example": "CP+RC"
+        },
+        "investigationID": {
+          "description": "The investigation that this hole was undertaken for. Reference to the identifier for the corresponding agsProjectInvestigation object, if used.",
+          "type": "string",
+          "example": "GIPackageA"
+        },
+        "investigation": {
+          "description": "The investigation that this hole was undertaken for. Simple text alternative to investigationID if agsProjectInvestigation not used. Use of both attributes together is not recommended.",
+          "type": "string",
+          "example": "2018 GI Package A"
+        },
+        "date": {
+          "description": "Date of exploration, conventionally the start date for holes that take more than one day.",
+          "type": "string",
+          "format": "date",
+          "example": "2018-05-23"
+        },
+        "propertySetID": {
+          "description": "Reference to additional property data for this hole by reference to an agsiDataPropertySet object. Could be used for additional hole metadata or for profiles of test results, e.g. SPT.",
+          "type": "string",
+          "example": "PropertySPTABH01"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Original name on logs: BH1"
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": ["holeID", "topCoordinate", "verticalHoleDepth"]
+        },
+        {
+          "required": ["holeID", "profileCoordinates"]
+        }
+      ]
+    },
+    "agsiGeometryColumnSet": {
+      "description": "An agsiGeometryColumnSet object is set of vertical column segments, typically used to represent geology in exploratory holes. Sets are expected to align with geological units, although additional or alternative subdivisions are permitted. The data for the individual column segments is included via the embedded agsiGeometryColumn objects. For information on the exploratory holes themselves see agsiGeometryExpHoleSet and agsiGeometryExpHole.",
+      "type": "object",
+      "properties": {
+        "geometryID": {
+          "description": "Identifier that will be referenced by agsiModelElement. All identifiers used within the agsiGeometry group shall be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "GIGeologyAGCC"
+        },
+        "description": {
+          "description": "Short description of the set of column segments defined here",
+          "type": "string",
+          "example": "Gotham City Clay (2018 GI Package A)"
+        },
+        "columnType": {
+          "description": "Type of information conveyed in this column set.",
+          "type": "string",
+          "example": "Geology"
+        },
+        "agsiGeometryColumn": {
+          "description": "Array of embedded agsiGeometryColumn object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiGeometryColumn"
+          }
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["geometryID"]
+    },
+    "agsiGeometryColumn": {
+      "description": "An agsiGeometryColumn object provides the geometric data for a single column segment, typically used for geological logging descriptions. In addition, useful information such as the geological description can be included. This object may be associated with an agsiGeometryExpHole object, but this is not essential.",
+      "type": "object",
+      "properties": {
+        "topCoordinate": {
+          "description": "Co-ordinates of the top of the column segment, as a co-ordinate tuple.",
+          "type": "array",
+          "$ref": "#/$defs/coordinateTuple",
+          "example": [1275.5, 2195.0, 6.3]
+        },
+        "verticalBottomElevation": {
+          "description": "For a vertical column only, elevation of bottom of segment. For non vertical segments use bottomCoordinates instead.",
+          "type": "number",
+          "example": -28.4
+        },
+        "bottomCoordinate": {
+          "description": "Co-ordinates of the bottom of the segment, as a co-ordinate tuple. Takes precedence over verticalBottomElevation if they are in conflict.",
+          "type": "array",
+          "$ref": "#/$defs/coordinateTuple",
+          "example": [1275.5, 2195.0, -28.4]
+        },
+        "holeName": {
+          "description": "Name of the relevant exploratory hole. Allows this information to be conveyed when the exploratory holes are not modelled as objects. Not required (and recommended not used) if holeID used.",
+          "type": "string",
+          "example": "BH01"
+        },
+        "holeID": {
+          "description": "Link to agsiGeometryExpHole object for the relevant exploratory hole. Reference should be made to the holeID attribute, not holeName.",
+          "type": "string",
+          "example": "A/BH01"
+        },
+        "description": {
+          "description": "Geological description, or other type of description depending on use of column",
+          "type": "string",
+          "example": "Stiff to very stiff blue grey slightly sandy silty CLAY with rare claystone layers (GOTHAM CITY CLAY)"
+        },
+        "legendCode": {
+          "description": "Legend code. Recommend using code from AGS format ABBR code list.",
+          "type": "string",
+          "example": "201"
+        },
+        "geologyCode": {
+          "description": "Geology code. Typically a project specific code defined as agsProjectCode object.",
+          "type": "string",
+          "example": "GCC"
+        },
+        "geologyCode2": {
+          "description": "2nd geology code, if applicable. Typically a project specific code defined as agsProjectCode object.",
+          "type": "string",
+          "example": "A2"
+        },
+        "propertySetID": {
+          "description": "Reference to additional property data for this column segment by reference to an agsiDataPropertySet object.",
+          "type": "string",
+          "example": "PropExampleRef"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Top of 1.2m of GCC in original log re-interpreted as ALV."
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": ["topCoordinate", "verticalBottomElevation"]
+        },
+        {
+          "required": ["topCoordinate", "bottomCoordinate"]
+        }
+      ]
+    },
+    "agsiData": {
+      "description": "The agsiData object is a container for all of the data for a file/data set. It is required in all cases where properties and/or parameters are provided. There is only one agsiData object per root object. All other objects in the Data group are embedded within agsiData.",
+      "type": "object",
+      "properties": {
+        "dataSetID": {
+          "description": "Identifier, possibly a UUID. This is optional and is not referenced anywhere else in the schema, but it is beneficial to include this to help with data control and integrity.",
+          "type": "string",
+          "example": "40b785d0-547c-41c5-9b36-3cd31126ecb0"
+        },
+        "description": {
+          "description": "Similar usage to dataSetID but intended to be a more verbose description.",
+          "type": "string",
+          "example": "My Project Name GIR interpreted data"
+        },
+        "codeDictionary": {
+          "description": "URI link to the dictionary/vocabulary used for the code list. Use of the  AGSi code list is recommended, but it can be changed to an alternate list, e.g. lists published by other agencies (UK or overseas) or major projects/clients. If this is populated, then use of agsiDataCode is optional.",
+          "type": "string",
+          "format": "uri",
+          "example": "https://ags-data-format-wg.gitlab.io/AGSi_Documentation/Codes_List/"
+        },
+        "documentSetID": {
+          "description": "Reference to documents relevant to the properties and parameters described herein, such as a GIR, AGS (factual) data and/or GDR",
+          "type": "string",
+          "example": "PackageXGIRGDR"
+        },
+        "agsiDataParameterSet": {
+          "description": "Array of embedded agsiDataParameterSet object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiDataParameterSet"
+          }
+        },
+        "agsiDataPropertySet": {
+          "description": "Array of embedded agsiDataPropertySet object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiDataPropertySet"
+          }
+        },
+        "agsiDataCase": {
+          "description": "Array of embedded agsiDataCase object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiDataCase"
+          }
+        },
+        "agsiDataCode": {
+          "description": "Array of embedded agsiDataCode object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiDataCode"
+          }
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": ["codeDictionary"]
+        },
+        {
+          "required": ["agsiDataCode"]
+        }
+      ]
+    },
+    "agsiDataPropertySet": {
+      "description": "agsiDataPropertySet objects are containers for sets of property data, with each set typically corresponding to the property data required for a model element. Sets may be referenced from agsiModelElement and other parts of the schema.",
+      "type": "object",
+      "properties": {
+        "propertySetID": {
+          "description": "Identifier that will be referenced by agsiModelElement and other objects as required. All identifiers used by agsiDataPropertySet must be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "PropGCC/W"
+        },
+        "description": {
+          "description": "Short description identifying the property set.",
+          "type": "string",
+          "example": "Gotham City Clay, west zone"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        },
+        "agsiDataPropertyValue": {
+          "description": "Array of embedded documentSetID object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiDataPropertyValue"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["propertySetID"]
+    },
+    "agsiDataPropertyValue": {
+      "description": "Each agsiDataPropertyValue object provides the data for a single defined property. The property data conveyed may be a simple statistical summary,  a text based summary or a profile of data points. Refer to Data general rules and conventions for further details.",
+      "type": "object",
+      "properties": {
+        "codeID": {
+          "description": "Code that identifies the property. Codes should be defined in either the agsiDataCode object, or in the code dictionary defined in the agsiData object.",
+          "type": "string",
+          "minLength": 1,
+          "example": "TRIG_CU"
+        },
+        "caseID": {
+          "description": "Code that identifies a specific usage or subdivision of the property. For example, an alternative statistical summary that excludes outliers. If the input is a code, this shall be defined in the agsiDataCase object. May be left blank, but the combination of codeID and caseID should be unique for each agsiDataProperty Value object.",
+          "type": "string",
+          "example": "ExclOutlier"
+        },
+        "valueMin": {
+          "description": "Minimum value",
+          "type": "number",
+          "example": 78
+        },
+        "valueMax": {
+          "description": "Maximum value",
+          "type": "number",
+          "example": 345
+        },
+        "valueMean": {
+          "description": "Mean value",
+          "type": "number",
+          "example": 178.2
+        },
+        "valueStdDev": {
+          "description": "Standard deviation",
+          "type": "number",
+          "example": 36.4
+        },
+        "valueCount": {
+          "description": "Number of results",
+          "type": "number",
+          "example": 58
+        },
+        "valueText": {
+          "description": "Alternative text based summary, if required or preferred. May be needed when limiting values are not numeric (<0.001) or could be used to provide a list of results for very small data sets.",
+          "type": "string",
+          "example": "<0.01 to 12.57, mean 3.21, (16 results)"
+        },
+        "valueProfileIndVarCodeID": {
+          "description": "Code that identifies the independent variable for a profile, i.e. what the property value varies against. Codes should be defined in either the agsiDataCode object, or in the code dictionary defined in the agsiData object.",
+          "type": "string",
+          "example": "Elevation"
+        },
+        "valueProfile": {
+          "description": "A profile of values as an ordered list of tuples of [independent variable value, parameter value]. Refer to General /Data input formats for further information.",
+          "type": "array",
+          "$ref": "#/$defs/valueProfile",
+          "example": [
+            [15.5, 60.0],
+            [14.0, 75.0],
+            [12.5, 105.0]
+          ]
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["codeID"]
+    },
+    "agsiDataParameterSet": {
+      "description": "agsiDataParameterSet objects are containers for sets of parameter data, with each set typically corresponding to the parameters required for a model element. Sets may be referenced from agsiModelElement objects.",
+      "type": "object",
+      "properties": {
+        "parameterSetID": {
+          "description": "Identifier that will be referenced by agsiModelElement. All identifiers used by agsiDataParameterSet must be unique. Use of UUIDs for identifiers is recommended for large datasets.",
+          "type": "string",
+          "minLength": 1,
+          "example": "ParamGCC/W"
+        },
+        "description": {
+          "description": "Short description identifying the data set.",
+          "type": "string",
+          "example": "Gotham City Clay, west zone"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        },
+        "agsiDataParameterValue": {
+          "description": "Array of embedded documentSetID object(s)",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agsiDataParameterValue"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["parameterSetID"]
+    },
+    "agsiDataParameterValue": {
+      "description": "Each agsiDataParameterValue objects provides the data for a single defined parameter. The parameter value conveyed may be numeric, a profile of numeric values (e.g. a design line) or text. Refer to Data general rules and conventions for further details.",
+      "type": "object",
+      "properties": {
+        "codeID": {
+          "description": "Code that identifies the parameter. Codes should be defined in either the agsiDataCode object, or in the code dictionary defined in the agsiData object.",
+          "type": "string",
+          "minLength": 1,
+          "example": "UndrainedShearStrength"
+        },
+        "caseID": {
+          "description": "Code (or text) that identifies the use case for a parameter. For example, different values of the same parameter may be defined corresponding to different design/analysis methods. May also be used to define sets of parameters for sensitivity analyses. If the input is a code, this should be defined in the agsiDataCase object. May be left blank, but the combination of codeID and caseID should be unique for each agsiDataParameter Value object.",
+          "type": "string",
+          "example": "EC7Pile"
+        },
+        "valueNumeric": {
+          "description": "Numeric value of parameter, if applicable.",
+          "type": "number",
+          "example": 75
+        },
+        "valueText": {
+          "description": "Text based value of parameter, if applicable. For a profile (see below), this could be used for a concise description or representation of the profile. Unless specified otherwise, this attribute should only be used when the value is not numeric, i.e. valueNumeric not used.",
+          "type": "string",
+          "example": "100 + 6z (z=0 @ +6.0mOD)"
+        },
+        "valueProfileIndVarCodeID": {
+          "description": "Code that identifies the independent variable for a profile, i.e. what the parameter value varies against. Codes should be defined in either the agsiDataCode object, or in the code dictionary defined in the agsiData object. Refer to General /Data input formats for further information.",
+          "type": "string",
+          "example": "Elevation"
+        },
+        "valueProfile": {
+          "description": "The profile of values as an ordered list of tuples of [independent variable value, parameter value]. Typically used to represent design lines. Refer to General /Data input formats for further information.",
+          "type": "array",
+          "$ref": "#/$defs/valueProfile",
+          "example": [
+            [6.0, 100.0],
+            [-24.0, 280.0]
+          ]
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["codeID"]
+    },
+    "agsiDataCode": {
+      "description": "agsiDataCode is a dictionary for the property and parameter codes referenced by other objects. It also includes the units applicable for each property/parameter. Use of codes from the AGSi code list is recommended. Replication of the codes from a published dictionary such as the AGSi code list is optional provided that the dictionary used is identified in agsiData (codeDictionary attribute). If published codes are replicated here, only those used in the file/data set should be included. Any user defined (non standard) codes must be included, with the isStandard flag set as false.",
+      "type": "object",
+      "properties": {
+        "codeID": {
+          "description": "Identifying code for a property or parameter. Use of codes from a standard dictionary, such as the AGSi code list, is recommended. Referenced by agsiDataParameterValue and/or agsiData PropertyValue ",
+          "type": "string",
+          "minLength": 1,
+          "example": "UndrainedShearStrength"
+        },
+        "description": {
+          "description": "Name or short description of what the code represents.",
+          "type": "string",
+          "minLength": 1,
+          "example": "Undrained shear strength"
+        },
+        "units": {
+          "description": "Units of measurement for this property or parameter. An empty string entry is required if there are no units (dimensionless).",
+          "type": "string",
+          "example": "kPa"
+        },
+        "isStandard": {
+          "description": "true if code is from standard dictionary such as the AGSi code list, i.e. user defined code for this project. If omitted, should be assumed to be false, i.e. project specific or other non-standard code",
+          "type": "boolean",
+          "example": true
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["codeID", "description"]
+    },
+    "agsiDataCase": {
+      "description": "agsiDataCase is a dictionary of the  caseID codes used agsiDataParameterValue and agsiDataPropertyValue, if applicable. Case can be used where the specific usage of a parameter needs to be defined, e.g. for a specific type of analysis. Case IDs may also be used to facilitate alternative reporting of properties, e.g. a statistical summary that ignores outliers.",
+      "type": "object",
+      "properties": {
+        "caseID": {
+          "description": "Identifying code for a defined case. Referenced by agsiDataParameterValue and/or agsiDataPropertyValue ",
+          "type": "string",
+          "minLength": 1,
+          "example": "EC7Pile"
+        },
+        "description": {
+          "description": "Short description of the case, e.g. use case for a parameter.",
+          "type": "string",
+          "minLength": 1,
+          "example": "EC7 Pile design"
+        },
+        "remarks": {
+          "description": "Additional remarks, if required",
+          "type": "string",
+          "example": "Some remarks if required"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["caseID", "description"]
+    }
+  }
+}

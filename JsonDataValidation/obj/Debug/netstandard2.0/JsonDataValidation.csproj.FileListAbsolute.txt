@@ -1,0 +1,9 @@
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\bin\Debug\netstandard2.0\JsonDataValidation.deps.json
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\bin\Debug\netstandard2.0\JsonDataValidation.dll
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\bin\Debug\netstandard2.0\JsonDataValidation.pdb
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\obj\Debug\netstandard2.0\JsonDataValidation.csprojAssemblyReference.cache
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\obj\Debug\netstandard2.0\JsonDataValidation.AssemblyInfoInputs.cache
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\obj\Debug\netstandard2.0\JsonDataValidation.AssemblyInfo.cs
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\obj\Debug\netstandard2.0\JsonDataValidation.csproj.CoreCompileInputs.cache
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\obj\Debug\netstandard2.0\JsonDataValidation.dll
+c:\Users\ed.fisk\Desktop\JsonDataValidation\JsonDataValidation\obj\Debug\netstandard2.0\JsonDataValidation.pdb
