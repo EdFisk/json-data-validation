@@ -15,3 +15,4 @@ C:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationT
 C:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.csproj.CopyComplete
 C:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.dll
 C:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.pdb
+C:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.genruntimeconfig.cache
