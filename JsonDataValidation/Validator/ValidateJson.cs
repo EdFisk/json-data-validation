@@ -8,11 +8,15 @@ using Newtonsoft.Json.Schema;
 
 namespace JsonDataValidation.Validator
 {
+    public class resultsMessage
+    {
+        public static string validMessage { get; set; } = "The Json is VALID";
+        public static string invalidMessage { get; set; } = "The Json is INVALID";
+    }
     public static class ValidateJson
     {
 
         [Calculation("Json validator", "Validate a json input against a json schema", "ed.fisk@arup.com", LevelOfReview.Complete)]
-        [Output("Valid?", "Is the json valid against the schema provided", "", "")]
         public static ArupComputeResult ValidateJsonInput(
             [Input("Json","A json input as a string","","")]
             string input_json,
@@ -33,7 +37,7 @@ namespace JsonDataValidation.Validator
 
                 bool isValid = json.IsValid(schema, out errorMessages);
 
-                string isValidStr = Convert.ToString(isValid);
+                string isValidStr = (isValid == true) ? resultsMessage.validMessage : resultsMessage.invalidMessage;
 
                 ArupComputeResultItem acResult = new ArupComputeResultItem();
                 acResult.Value = isValidStr;
