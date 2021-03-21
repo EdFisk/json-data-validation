@@ -18,7 +18,7 @@ namespace JsonDataValidationTests.Validator
             string json = File.ReadAllText(json_fp);
             string schema = File.ReadAllText(schema_fp);
 
-            string Result_expected = "True";
+            string Result_expected = resultsMessage.validMessage;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
             Assert.AreEqual(Result_expected, comparison.ArupComputeResultItems[0].Value);
@@ -32,7 +32,7 @@ namespace JsonDataValidationTests.Validator
             string json = File.ReadAllText(json_fp);
             string schema = File.ReadAllText(schema_fp);
 
-            string Result_expected = "False";
+            string Result_expected = resultsMessage.invalidMessage;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
             Assert.AreEqual(Result_expected, comparison.ArupComputeResultItems[0].Value);
@@ -46,7 +46,7 @@ namespace JsonDataValidationTests.Validator
             string json = File.ReadAllText(json_fp);
             string schema = File.ReadAllText(schema_fp);
 
-            string Result_expected = "False";
+            string Result_expected = resultsMessage.invalidMessage;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
             Assert.AreEqual(Result_expected, comparison.ArupComputeResultItems[0].Value);
@@ -60,7 +60,7 @@ namespace JsonDataValidationTests.Validator
             string json = File.ReadAllText(json_fp);
             string schema = File.ReadAllText(schema_fp);
 
-            string Result_expected = "False";
+            string Result_expected = resultsMessage.invalidMessage;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
             Assert.AreEqual(Result_expected, comparison.ArupComputeResultItems[0].Value);
