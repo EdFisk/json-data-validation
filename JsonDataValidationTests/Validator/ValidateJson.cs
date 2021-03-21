@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using JsonDataValidation;
+using JsonDataValidation.Validator;
 using Arup.Compute.DotNetSdk;
 using System.IO;
 
-namespace JsonDataValidationTests
+namespace JsonDataValidationTests.Validator
 {
     [TestClass]
     public class ValidateJsonTest

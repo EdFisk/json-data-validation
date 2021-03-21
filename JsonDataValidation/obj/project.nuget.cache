@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vFIOSVZ1VgFpIUCgX8Osb2+wxtuumHu184UssN3xS1Af6hScKl7c/gy60wqg4fYjF4H4VVuIzwK+AlbVrWKanw==",
+  "dgSpecHash": "fDuhaLmNuPn1BkXEwJ3Jp836NoUHAvls3We31RTfz1zVRdvBY/Xz1SEMbIAI2ydxm6aQ0iKBNCEOEA+ubTr92Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ed.fisk\\Desktop\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj",
+  "projectFilePath": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ed.fisk\\.nuget\\packages\\arup.compute.dotnetsdk\\1.4.1.3533\\arup.compute.dotnetsdk.1.4.1.3533.nupkg.sha512",
     "C:\\Users\\ed.fisk\\.nuget\\packages\\arup.compute.models\\0.0.0.935\\arup.compute.models.0.0.0.935.nupkg.sha512",

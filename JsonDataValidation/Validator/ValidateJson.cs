@@ -6,9 +6,9 @@ using Arup.Compute.DotNetSdk.Attributes;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 
-namespace JsonDataValidation
+namespace JsonDataValidation.Validator
 {
-    public class ValidateJson
+    public static class ValidateJson
     {
 
         [Calculation("Json validator", "Validate a json input against a json schema", "ed.fisk@arup.com", LevelOfReview.Complete)]

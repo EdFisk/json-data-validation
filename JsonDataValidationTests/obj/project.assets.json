@@ -6946,6 +6946,7 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
+          "targetAlias": "netcoreapp2.2",
           "projectReferences": {
             "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj": {
               "projectPath": "C:\\Users\\ed.fisk\\Desktop\\Git_Repositories\\JsonDataValidation\\JsonDataValidation\\JsonDataValidation.csproj"
@@ -6961,6 +6962,7 @@
     },
     "frameworks": {
       "netcoreapp2.2": {
+        "targetAlias": "netcoreapp2.2",
         "dependencies": {
           "MSTest.TestAdapter": {
             "target": "Package",
@@ -6982,10 +6984,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
