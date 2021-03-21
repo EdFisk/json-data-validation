@@ -41,6 +41,8 @@ namespace JsonDataValidation.Validator
 
                 ArupComputeResultItem acResult = new ArupComputeResultItem();
                 acResult.Value = isValidStr;
+                acResult.Description = "";
+                acResult.Symbol = "";
 
                 ArupComputeResult result = new ArupComputeResult();
                 result.ArupComputeResultItems = new List<ArupComputeResultItem>();
