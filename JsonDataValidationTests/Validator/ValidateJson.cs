@@ -21,6 +21,9 @@ namespace JsonDataValidationTests.Validator
             string Result_expected = resultsMessage.validMessage;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
+
+            string report_HTML = comparison.ArupComputeReport_HTML;
+
             Assert.AreEqual(Result_expected, comparison.ArupComputeResultItems[0].Value);
         }
         [TestMethod]
@@ -34,9 +37,10 @@ namespace JsonDataValidationTests.Validator
 
             string Result_expected = resultsMessage.invalidMessage;
 
-
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
+
             string report_HTML = comparison.ArupComputeReport_HTML;
+
             Assert.AreEqual(Result_expected, comparison.ArupComputeResultItems[0].Value);
         }
         [TestMethod]
@@ -51,6 +55,9 @@ namespace JsonDataValidationTests.Validator
             string Result_expected = resultsMessage.invalidMessage;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
+
+            string report_HTML = comparison.ArupComputeReport_HTML;
+
             Assert.AreEqual(Result_expected, comparison.ArupComputeResultItems[0].Value);
         }
         [TestMethod]
@@ -65,6 +72,9 @@ namespace JsonDataValidationTests.Validator
             string Result_expected = resultsMessage.invalidMessage;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
+
+            string report_HTML = comparison.ArupComputeReport_HTML;
+
             Assert.AreEqual(Result_expected, comparison.ArupComputeResultItems[0].Value);
         }
         [TestMethod]
@@ -79,6 +89,9 @@ namespace JsonDataValidationTests.Validator
             double Errors_expected = 1;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
+
+            string report_HTML = comparison.ArupComputeReport_HTML;
+
             Assert.AreEqual(Errors_expected, comparison.Errors.Count);
         }
     }
