@@ -41,13 +41,29 @@ namespace JsonDataValidation.Validator
                 ArupComputeResult result = new ArupComputeResult();
                 result.ArupComputeResultItems = new List<ArupComputeResultItem>();
                 result.ArupComputeResultItems.Add(acResult);
+
+                result.ArupComputeReport_HTML = @"<h1>Json Data Validator Results</h1>
+                                                <h2>The json input is " + ((isValid == true) ? "valid" : "invalid") + "</h2>";
+
+                if (isValid == true)
+                {
+
+                }
+                else
+                {
+
+                }
+
+
+
+
                 return result;
             }
             catch
             {
                 ArupComputeResult result = new ArupComputeResult();
                 result.Errors = new List<string>();
-                result.Errors.Add("The input Json or Schema was in the incorrect format");
+                result.Errors.Add("The input json or schema was in the incorrect format");
                 return result;
             }
         }
