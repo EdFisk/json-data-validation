@@ -1,0 +1,17 @@
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\JsonDataValidationTests.deps.json
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\JsonDataValidationTests.runtimeconfig.json
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\JsonDataValidationTests.runtimeconfig.dev.json
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\JsonDataValidationTests.dll
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\JsonDataValidationTests.pdb
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\JsonDataValidation.dll
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\bin\Debug\netcoreapp2.2\JsonDataValidation.pdb
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.csprojAssemblyReference.cache
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.csproj.CoreCompileInputs.cache
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.AssemblyInfoInputs.cache
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.AssemblyInfo.cs
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.csproj.CopyComplete
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.dll
+c:\Users\ed.fisk\Desktop\Git_Repositories\JsonDataValidation\JsonDataValidationTests\obj\Debug\netcoreapp2.2\JsonDataValidationTests.pdb
