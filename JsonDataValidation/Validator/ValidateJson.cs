@@ -10,8 +10,8 @@ namespace JsonDataValidation.Validator
 {
     public class resultsMessage
     {
-        public static string validMessage { get; set; } = "The Json is VALID";
-        public static string invalidMessage { get; set; } = "The Json is INVALID";
+        public static string validMessage { get; set; } = "The json input is valid";
+        public static string invalidMessage { get; set; } = "The json input is invalid";
     }
     public static class ValidateJson
     {
@@ -47,19 +47,15 @@ namespace JsonDataValidation.Validator
                 result.ArupComputeResultItems.Add(acResult);
 
                 result.ArupComputeReport_HTML = @"<h1>Json Data Validator Results</h1>
-                                                <h2>The json input is " + ((isValid == true) ? "valid" : "invalid") + "</h2>";
+                                                <h2>" + isValidStr + "!</h2>";
 
-                if (isValid == true)
+                if (isValid == false)
                 {
-
+                    foreach (ValidationError message in errorMessages)
+                    {
+                        result.ArupComputeReport_HTML += $"<h3>Error: {message.Message} Line {message.LineNumber}. Position {message.LinePosition}.</h3>";
+                    }
                 }
-                else
-                {
-
-                }
-
-
-
 
                 return result;
             }
