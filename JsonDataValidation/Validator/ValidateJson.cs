@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Arup.Compute.DotNetSdk;
 using Arup.Compute.DotNetSdk.Enums;
 using Arup.Compute.DotNetSdk.Attributes;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
+using JsonDataValidation.Helpers;
 
 namespace JsonDataValidation.Validator
 {
-    public class resultsMessage
-    {
-        public static string validMessage { get; set; } = "The json input is valid";
-        public static string invalidMessage { get; set; } = "The json input is invalid";
-    }
     public static class ValidateJson
     {
 
@@ -20,10 +15,11 @@ namespace JsonDataValidation.Validator
         public static ArupComputeResult ValidateJsonInput(
             [Input("Json","A json input as a string","","")]
             string input_json,
-            [Input("JsonSchema", "A json schema input as a string", "", "")]
+            [Input("Schema", "A json schema input as a string", "", "")]
             string input_schema
         )
         {
+            // Is the input format correct
             try
             {
                 // Convert schema string to LINQ schema
@@ -35,37 +31,44 @@ namespace JsonDataValidation.Validator
                 // Validates the object against the schema
                 IList<ValidationError> errorMessages;
 
+                // Validate the json
                 bool isValid = json.IsValid(schema, out errorMessages);
+                string isValidStr = (isValid == true) ? "The json input was VALID against the schema." : "The json input was INVALID against the schema.";
 
-                string isValidStr = (isValid == true) ? resultsMessage.validMessage : resultsMessage.invalidMessage;
+                // Add items to the report
+                Report.AddTitle("Json validaiton", Stylings.NormalBig);
+                Report.AddText(isValidStr, Stylings.NormalMedium);
 
-                ArupComputeResultItem acResult = new ArupComputeResultItem();
-                acResult.Value = isValidStr;
-                acResult.Description = "";
-                acResult.Symbol = "";
-
-                ArupComputeResult result = new ArupComputeResult();
-                result.ArupComputeResultItems = new List<ArupComputeResultItem>();
-                result.ArupComputeResultItems.Add(acResult);
-
-                result.ArupComputeReport_HTML = @"<h1>Json Data Validator Results</h1>
-                                                <h2>" + isValidStr + "!</h2>";
-
+                List<string> errorsList = new List<string> { };
+                // Add errors to the report
                 if (isValid == false)
                 {
-                    foreach (ValidationError message in errorMessages)
+                    List<string> errorMessagesStr = new List<string> { };
+                    foreach (ValidationError error in errorMessages)
                     {
-                        result.ArupComputeReport_HTML += $"<h3>Error: {message.Message} Line {message.LineNumber}. Position {message.LinePosition}.</h3>";
+                        string errorString = $"{error.Message} Line {error.LineNumber}. Position {error.LinePosition}.";
+                        errorMessagesStr.Add(errorString);
+                        errorsList.Add(errorString);
                     }
+                    Report.AddText("Errors:", Stylings.ErrorMedium);
+                    Report.AddList(errorMessagesStr, Stylings.ErrorSmall);
                 }
 
+                // Create result
+                ArupComputeResult result = Result.AddResult(isValid, errorsList);
                 return result;
             }
+            // Is the input format incorrect
             catch
             {
-                ArupComputeResult result = new ArupComputeResult();
-                result.Errors = new List<string>();
-                result.Errors.Add("The input json or schema was in the incorrect format");
+                List<string> errorsList = new List<string> { };
+                errorsList.Add("The input json or schema was not able to be loaded.");
+                Report.AddTitle("Json validaiton", Stylings.NormalBig);
+                Report.AddText("Errors:", Stylings.ErrorMedium);
+                Report.AddList(errorsList, Stylings.ErrorSmall);
+
+                ArupComputeResult result = Result.AddResult(false, errorsList);
+
                 return result;
             }
         }
