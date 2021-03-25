@@ -23,7 +23,8 @@
           "netstandard2.0"
         ],
         "sources": {
-          "C:\\JsonDataValidation\\": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/arupcomputedevops/_packaging/arupcomputedevops@Release/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
