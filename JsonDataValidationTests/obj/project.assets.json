@@ -6941,8 +6941,7 @@
         "netcoreapp2.2"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://pkgs.dev.azure.com/arupcomputedevops/_packaging/arupcomputedevops@Release/nuget/v3/index.json": {}
+        "C:\\JsonDataValidation\\": {}
       },
       "frameworks": {
         "netcoreapp2.2": {
