@@ -18,7 +18,7 @@ namespace JsonDataValidationTests.Validator
             string json = File.ReadAllText(json_fp);
             string schema = File.ReadAllText(schema_fp);
 
-            string Result_expected = resultsMessage.validMessage;
+            bool Result_expected = true;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
 
@@ -35,7 +35,7 @@ namespace JsonDataValidationTests.Validator
             string json = File.ReadAllText(json_fp);
             string schema = File.ReadAllText(schema_fp);
 
-            string Result_expected = resultsMessage.invalidMessage;
+            bool Result_expected = false;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
 
@@ -52,7 +52,7 @@ namespace JsonDataValidationTests.Validator
             string json = File.ReadAllText(json_fp);
             string schema = File.ReadAllText(schema_fp);
 
-            string Result_expected = resultsMessage.invalidMessage;
+            bool Result_expected = false;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
 
@@ -69,7 +69,7 @@ namespace JsonDataValidationTests.Validator
             string json = File.ReadAllText(json_fp);
             string schema = File.ReadAllText(schema_fp);
 
-            string Result_expected = resultsMessage.invalidMessage;
+            bool Result_expected = false;
 
             ArupComputeResult comparison = ValidateJson.ValidateJsonInput(json, schema);
 
