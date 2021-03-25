@@ -9,8 +9,8 @@ namespace JsonDataValidation.Helpers
         {
             ArupComputeResultItem resultItem = new ArupComputeResultItem();
             resultItem.Value = isValid;
-            resultItem.Description = (errors.Count != 0) ? "Valid" : "Error! Valid";
-            resultItem.Symbol = (errors.Count != 0) ? "Valid" : "Error! Valid";
+            resultItem.Description = "Valid";
+            resultItem.Symbol = "Valid";
 
             ArupComputeResult result = new ArupComputeResult();
             result.Errors = new List<string>();
