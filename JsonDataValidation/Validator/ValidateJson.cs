@@ -36,7 +36,7 @@ namespace JsonDataValidation.Validator
                 string isValidStr = (isValid == true) ? "The json input was VALID against the schema." : "The json input was INVALID against the schema.";
 
                 // Add items to the report
-                Report.AddTitle("Json validaiton", Stylings.NormalBig);
+                Report.AddTitle("Json validation", Stylings.NormalBig);
                 Report.AddText(isValidStr, Stylings.NormalMedium);
 
                 List<string> errorsList = new List<string> { };
@@ -63,7 +63,7 @@ namespace JsonDataValidation.Validator
             {
                 List<string> errorsList = new List<string> { };
                 errorsList.Add("The input json or schema was not able to be loaded.");
-                Report.AddTitle("Json validaiton", Stylings.NormalBig);
+                Report.AddTitle("Json validation", Stylings.NormalBig);
                 Report.AddText("Errors:", Stylings.ErrorMedium);
                 Report.AddList(errorsList, Stylings.ErrorSmall);
 

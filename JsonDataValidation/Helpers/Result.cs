@@ -10,7 +10,7 @@ namespace JsonDataValidation.Helpers
             ArupComputeResultItem resultItem = new ArupComputeResultItem();
             resultItem.Value = isValid;
             resultItem.Description = (errors.Count != 0) ? "Valid" : "Error! Valid";
-            resultItem.Symbol = "n/a";
+            resultItem.Symbol = (errors.Count != 0) ? "Valid" : "Error! Valid";
 
             ArupComputeResult result = new ArupComputeResult();
             result.Errors = new List<string>();
@@ -21,6 +21,7 @@ namespace JsonDataValidation.Helpers
             result.ArupComputeResultItems = new List<ArupComputeResultItem>();
             result.ArupComputeResultItems.Add(resultItem);
             result.ArupComputeReport_HTML = Report.reportStr;
+            Report.reportStr = "";
             return result;
         }
     }
